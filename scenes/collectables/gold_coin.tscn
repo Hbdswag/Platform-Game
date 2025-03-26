@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://bw1c35iwa0mfc"]
+
+[ext_resource type="Script" path="res://scripts/collectable/gold_coin.gd" id="1_f1cbd"]
+[ext_resource type="Texture2D" uid="uid://c0uvfw5ff05kf" path="res://Assets/Pirate Treasure/Sprites/Coin Effect/01.png" id="2_k00on"]
+[ext_resource type="Texture2D" uid="uid://b1j8nstcw0dx6" path="res://Assets/Pirate Treasure/Sprites/Coin Effect/02.png" id="3_2r0hf"]
+[ext_resource type="Texture2D" uid="uid://dar8u6xwc3hkf" path="res://Assets/Pirate Treasure/Sprites/Coin Effect/03.png" id="4_g1rlk"]
+[ext_resource type="Texture2D" uid="uid://dbypjtpioo272" path="res://Assets/Pirate Treasure/Sprites/Gold Coin/01.png" id="5_giwb2"]
+[ext_resource type="Texture2D" uid="uid://bjb2dg0xiu1lf" path="res://Assets/Pirate Treasure/Sprites/Gold Coin/02.png" id="6_5u3ms"]
+[ext_resource type="Texture2D" uid="uid://p0r83xj6blah" path="res://Assets/Pirate Treasure/Sprites/Gold Coin/03.png" id="7_ptiat"]
+[ext_resource type="Texture2D" uid="uid://6k2i7ifgd2hy" path="res://Assets/Pirate Treasure/Sprites/Gold Coin/04.png" id="8_tado3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n6m8u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k00on")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2r0hf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g1rlk")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"collect",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_giwb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5u3ms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ptiat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tado3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enwob"]
+radius = 6.08276
+
+[node name="GoldCoin" type="Area2D"]
+position = Vector2(5, 7)
+collision_layer = 0
+script = ExtResource("1_f1cbd")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(114, 143)
+sprite_frames = SubResource("SpriteFrames_n6m8u")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(115, 144)
+shape = SubResource("CircleShape2D_enwob")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
