@@ -9,6 +9,7 @@ func _ready():
 
 func _on_body_entered(body: Node2D) -> void:
 	sprite.play("collect")
+	$CollextSFX.play()
 	
 
 

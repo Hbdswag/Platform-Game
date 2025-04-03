@@ -12,6 +12,23 @@ const JUMP_GRAVITY = 900.0
 const FALL_GRAVITY = 400.0
 const TERMINAL_VELOCITY = 180.0
 
+var sword = false :
+	get: return sword
+	set(value):
+		if sword == value: return
+		sword = value
+		var current_anim = sprite.animation
+		var target_anim = current_anim
+		if value:
+			target_anim += "_sword"
+		else:
+			target_anim = target_anim.replace("_sword", "")
+		if sprite.sprite_frames.has_animation(target_anim):
+			var progress = sprite.frame_progress
+			var frame = sprite.frame
+			sprite.play(target_anim)
+			sprite.set_frame_and_progress(frame, progress)
+
 var direction :
 	get: return direction
 	set(value):

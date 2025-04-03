@@ -1,9 +1,16 @@
 extends PlayerBaseState
 
+@onready var sfx = $JumpSFX
+
+
 func enter():
 	play("jump")
 	object.velocity.y = -300
-	
+	sfx.play()
+
+
+
+
 func physics_update(delta):
 
 	move(delta, true)
